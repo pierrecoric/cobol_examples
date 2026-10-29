@@ -13,7 +13,7 @@
       *-----------------------------------------------------------------
        WORKING-STORAGE SECTION.
       *
-      *      Definition of a hard-coded group itemp named NUMBER-VALUES.
+      *      Definition of a hard-coded group item named NUMBER-VALUES.
       *                              The FILLER reserved word is used to
       *                    claim memory space without naming a variable.
       *
@@ -24,7 +24,7 @@
           05 FILLER          PIC X(10) VALUE "Cztery".
           05 FILLER          PIC X(10) VALUE "Pięc".
       *
-      *              Redifining the table NUMBER-VALUES as a table named
+      *         Redifining the group item NUMBER-VALUES as a table named
       *              NUMBER-TABLE containing 5 elements named WS-NUMBER.
       *
        01 NUMBER-TABLE REDEFINES NUMBER-VALUES.
