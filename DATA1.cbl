@@ -39,7 +39,7 @@
            MOVE 99 TO NUMERIC-DATA .
            DISPLAY NUMERIC-DATA.
       *
-      *                         The Compute clause perform an arithmetic 
+      *                        The Compute clause performs an arithmetic 
       *                  opperation an assigns the result to a variable.
       *
            COMPUTE DECIMAL-NUMBER = NUMERIC-DATA - DECIMAL-NUMBER.
