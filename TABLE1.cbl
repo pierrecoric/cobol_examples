@@ -47,14 +47,14 @@
       *                                       Tables are indexed from 1.
       * 
            DISPLAY "---------------".
-           DISPLAY WS-NUMBER(1).
+           DISPLAY WS-NUMBER (1).
            DISPLAY "---------------".
       *
       *                              More on PERFORM in another example.
       *             Iterating over the table and displaying its content.
       * 
            PERFORM UNTIL INDEX-COUNT > 5
-               DISPLAY WS-NUMBER(INDEX-COUNT)
+               DISPLAY WS-NUMBER (INDEX-COUNT)
                ADD 1 TO INDEX-COUNT
            END-PERFORM.
 
