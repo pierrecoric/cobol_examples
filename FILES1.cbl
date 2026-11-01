@@ -3,7 +3,11 @@
       *-----------------------------------------------------------------
        PROGRAM-ID. FILES1.
        AUTHOR. "Pierre".
-
+      *
+      *       In the INPUT-OUPUT SECTION, In the FILE-CONTROL paragraph,
+      *       we create an internal file named WORDS-LIST and we connect
+      *                           it to an external file called WRDLIST.
+      *
       *-----------------------------------------------------------------
        ENVIRONMENT DIVISION.
       *-----------------------------------------------------------------
