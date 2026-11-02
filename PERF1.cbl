@@ -12,11 +12,14 @@
        DATA DIVISION.
       *-----------------------------------------------------------------
       *
-      *                           Simply declaring a counter to display.
+      *                                  Declaring a counter to display.
+      *                         Declaring a String Buffer and a pointer.
       *
        WORKING-STORAGE SECTION.
 
-       77  COUNTER       PIC 9(2) VALUE 0.
+       77  COUNTER                      PIC 9(2) VALUE 0.
+       77  WS-STRING-BUFFER             PIC X(10) VALUE SPACE.
+       77  WS-STR-PTR                   PIC 9(2) VALUE 1.
 
       *-----------------------------------------------------------------
        PROCEDURE DIVISION.
@@ -39,7 +42,7 @@
       *                                         a given amount of times.
       *
            PERFORM 5 TIMES
-                DISPLAY "HELLO"
+               DISPLAY "HELLO"
            END-PERFORM.
 
            PERFORM DISPLAY-LINE.
@@ -47,9 +50,9 @@
       *
       *
            PERFORM VARYING COUNTER FROM 00 BY 1 UNTIL COUNTER EQUAL 10
-                DISPLAY
-                "HEY"
-                COUNTER
+               DISPLAY
+               "HEY"
+               COUNTER
            END-PERFORM.
       *
       *                             The paragraph END-PROGRAM is reached
@@ -57,6 +60,7 @@
       *
        END-PROGRAM.
            PERFORM DISPLAY-LINE.
+           PERFORM DISPLAY-TRIANGLE.
            DISPLAY "Goodbye".
            GOBACK.
       *
@@ -72,3 +76,15 @@
       *
        DISPLAY-LINE.
            DISPLAY "------------------------".
+      *
+      *                DISPLAY-TRIANGLE introduces the notion of string.
+      *         WS-STR-PTR is a pointer that is being updated by STRING.
+      *                             Not part of the class at this point.
+      *
+       DISPLAY-TRIANGLE.
+           PERFORM 9 TIMES
+               STRING "#" DELIMITED BY SIZE
+                    INTO WS-STRING-BUFFER WITH POINTER WS-STR-PTR
+               END-STRING
+               DISPLAY WS-STRING-BUFFER
+           END-PERFORM.
