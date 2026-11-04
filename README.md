@@ -21,3 +21,7 @@ Goes over a the declaration of a simple table. COBOL reserved words introduced: 
 ## 4. FILES1.cbl
 [FILES1.cbl](https://github.com/pierrecoric/cobol_examples/blob/main/FILES1.cbl)
 Shows how to open an external file and load its data in an internal file.
+
+## 5. PERF1.cbl
+[FILES1.cbl](https://github.com/pierrecoric/cobol_examples/blob/main/PERF1.cbl)
+Several examples of the use of PERFORM, examples of control flow and paragraphs.
