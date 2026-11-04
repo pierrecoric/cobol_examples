@@ -21,6 +21,7 @@ Goes over a the declaration of a simple table. COBOL reserved words introduced: 
 ## 4. FILES1
 [FILES1](https://github.com/pierrecoric/cobol_examples/tree/main/4_FILES1)
 Shows how to open an external file and load its data in an internal file.
+JCL example of how to link the external file with the program.
 
 ## 5. PERF1
 [PERF1](https://github.com/pierrecoric/cobol_examples/tree/main/5_PERF1)
