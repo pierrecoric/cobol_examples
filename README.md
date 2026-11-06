@@ -1,5 +1,5 @@
 # cobol_examples
-Short cobol programs to illustrate the [Open Mainframe Project Cobol Programming Course](https://openmainframeproject.org/projects/cobol-programming-course/)
+Short COBOL programs to illustrate the [Open Mainframe Project Cobol Programming Course](https://openmainframeproject.org/projects/cobol-programming-course/)
 
 
 ## 1. HELLO
@@ -16,7 +16,7 @@ Covers the WORKING-STORAGE SECTION, the picture clause, the MOVE and COMPUTE sta
 ## 3. TABLE1
 [TABLE1](https://github.com/pierrecoric/cobol_examples/tree/main/3_TABLE1)
 Based on chapter 4.
-Goes over a the declaration of a simple table. COBOL reserved words introduced: FILLER, REDEFINES, OCCURS, TIMES, PERFORM (more on perform later).
+Goes over the declaration of a simple table. COBOL reserved words introduced: FILLER, REDEFINES, OCCURS, TIMES, PERFORM (more on perform later).
 
 ## 4. FILES1
 [FILES1](https://github.com/pierrecoric/cobol_examples/tree/main/4_FILES1)
