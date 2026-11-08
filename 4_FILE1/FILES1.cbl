@@ -14,7 +14,7 @@
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
            SELECT WORDS-LIST ASSIGN TO WRDLIST.
-
+      *
       *-----------------------------------------------------------------
        DATA DIVISION.
       *-----------------------------------------------------------------
@@ -40,7 +40,7 @@
       *
        WORKING-STORAGE SECTION.
        77  LAST-RECORD         PIC X(1) VALUE SPACE.
-
+      *
       *-----------------------------------------------------------------
        PROCEDURE DIVISION.
       *-----------------------------------------------------------------
@@ -50,7 +50,7 @@
       * 
        OPEN-FILE.
            OPEN INPUT WORDS-LIST.
-      
+      *
       *
       *                            The paragraph READ-NEXT-RECORD starts
       *                     by a perform statement calling the paragraph
