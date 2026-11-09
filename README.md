@@ -30,3 +30,7 @@ Several examples of the use of PERFORM, examples of control flow and paragraphs.
 ## 6. SUB1
 [SUB1](https://github.com/pierrecoric/cobol_examples/tree/main/6_SUB1)
 Example to call a subprogram with and without passing data. Example of JCL to link these programs together.
+
+## 7. COND1
+[COND1](https://github.com/pierrecoric/cobol_examples/tree/main/7_COND1)
+Examples of different conditional expressions. Relative to chapter 8 of the course.
