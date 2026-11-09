@@ -18,8 +18,8 @@ Covers the WORKING-STORAGE SECTION, the picture clause, the MOVE and COMPUTE sta
 Based on chapter 4.
 Goes over the declaration of a simple table. COBOL reserved words introduced: FILLER, REDEFINES, OCCURS, TIMES, PERFORM (more on perform later).
 
-## 4. FILES1
-[FILES1](https://github.com/pierrecoric/cobol_examples/tree/main/4_FILES1)
+## 4. FILE1
+[FILES1](https://github.com/pierrecoric/cobol_examples/tree/main/4_FILE1)
 Shows how to open an external file and load its data in an internal file.
 JCL example of how to link the external file with the program.
 

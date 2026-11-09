@@ -62,7 +62,7 @@
            PERFORM EVAL-SOMETHING-AGAIN.
       *
            DISPLAY "Moving 22 to Something.".
-           MOVE 1 TO SOMETHING.
+           MOVE 22 TO SOMETHING.
            PERFORM REPORT-STATUS.
            PERFORM EVAL-SOMETHING-AGAIN.
       *
