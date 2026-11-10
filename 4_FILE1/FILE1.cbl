@@ -1,7 +1,7 @@
       *-----------------------------------------------------------------
        IDENTIFICATION DIVISION.
       *-----------------------------------------------------------------
-       PROGRAM-ID. FILES1.
+       PROGRAM-ID. FILE1.
        AUTHOR. "Pierre".
       *
       *       In the INPUT-OUPUT SECTION, In the FILE-CONTROL paragraph,
