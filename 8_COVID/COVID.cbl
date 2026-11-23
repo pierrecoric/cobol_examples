@@ -1,4 +1,4 @@
-      *----------------------------------------------------------------- 
+      *-----------------------------------------------------------------
        IDENTIFICATION DIVISION.
       *-----------------------------------------------------------------
        PROGRAM-ID. COVID.
@@ -18,7 +18,7 @@
        FD COVID-REPORT RECORDING MODE F.
        01  COVID-RECORD                   PIC X(210).
 
-       WORKING-STORAGE SECTION. 
+       WORKING-STORAGE SECTION.
 
       *                                              Format of the data:
       *
@@ -31,9 +31,9 @@
       *                                              TotalDeaths
       *                                              NewRecovered
       *                                              TotalRecovered
-      *                                              Date 
+      *                                              Date
       *
-      *                              Fields to get the raw textual data. 
+      *                              Fields to get the raw textual data.
       *
        01  RECORD-TXT.
            05 COUNTRY                     PIC X(50).
@@ -62,19 +62,19 @@
               10 NEW-REC-FRMT             PIC 9(12).
               10 TOTAL-REC-FRMT           PIC 9(12).
               10 DATE-FRMT                PIC X(25).
-      * 
-       77  STR-LEN                        PIC 9(3).
-       77  ENTRY-COUNT                    PIC 9(3) VALUE 0.
-       77  ENTRY-INDEX                    PIC 9(3).
-       77  LAST-RECORD                    PIC X(1) VALUE SPACE.
-      
+      *
+       01  STR-LEN                        PIC 9(3).
+       01  ENTRY-COUNT                    PIC 9(3) VALUE 0.
+       01  ENTRY-INDEX                    PIC 9(3).
+       01  LAST-RECORD                    PIC X(1) VALUE SPACE.
+
       *-----------------------------------------------------------------
        PROCEDURE DIVISION.
       *-----------------------------------------------------------------
       *
       *                                                   Open the file.
       *
-       OPEN-FILE.     
+       OPEN-FILE.
            OPEN INPUT COVID-REPORT.
        OPEN-FILE-END.
       *
@@ -89,13 +89,14 @@
               PERFORM FORMAT-RECORD
               PERFORM READ-RECORD
            END-PERFORM.
+           DISPLAY ENTRY-COUNT.
        READ-NEXT-RECORD-END.
       *
       *            Call the WRITE-RECORD paragraph to output the result.
       *
            PERFORM WRITE-RECORD.
       *
-      *                                                  Close the file. 
+      *                                                  Close the file.
       *
        CLOSE-STOP.
            CLOSE COVID-REPORT.
@@ -116,13 +117,13 @@
            UNSTRING COVID-RECORD DELIMITED BY ','
            INTO
            COUNTRY
-           COUNTRY-CODE 
-           SLUG 
-           NEW-CONF 
-           TOTAL-CONF 
-           NEW-DEATH 
-           TOTAL-DEATH 
-           NEW-REC 
+           COUNTRY-CODE
+           SLUG
+           NEW-CONF
+           TOTAL-CONF
+           NEW-DEATH
+           TOTAL-DEATH
+           NEW-REC
            TOTAL-REC
            DATE-TXT
            END-UNSTRING
@@ -132,40 +133,41 @@
       *                                 Paragraph to format the records.
       *
        FORMAT-RECORD.
-           COMPUTE STR-LEN = FUNCTION 
+           COMPUTE STR-LEN = FUNCTION
            LENGTH(FUNCTION TRIM(COUNTRY TRAILING))
-           MOVE COUNTRY(2:STR-LEN - 2) 
+           MOVE COUNTRY(2:STR-LEN - 2)
            TO COUNTRY-FRMT(ENTRY-COUNT)
-           
-           COMPUTE STR-LEN = FUNCTION 
+
+           COMPUTE STR-LEN = FUNCTION
            LENGTH(FUNCTION TRIM(COUNTRY-CODE TRAILING))
            MOVE COUNTRY-CODE(2:STR-LEN - 2)
            TO COUNTRY-CODE-FRMT(ENTRY-COUNT)
-           
-           COMPUTE STR-LEN = FUNCTION 
+
+           COMPUTE STR-LEN = FUNCTION
            LENGTH(FUNCTION TRIM(SLUG TRAILING))
            MOVE SLUG(2:STR-LEN - 2)
            TO SLUG-FRMT(ENTRY-COUNT)
-           
-           MOVE FUNCTION NUMVAL(NEW-CONF)
-           TO NEW-CONF-FRMT(ENTRY-COUNT)
-           
-           MOVE FUNCTION NUMVAL(TOTAL-CONF)
-           TO TOTAL-CONF-FRMT(ENTRY-COUNT)
-           
-           MOVE FUNCTION NUMVAL(NEW-DEATH)
-           TO NEW-DEATH-FRMT(ENTRY-COUNT)
 
-           MOVE FUNCTION NUMVAL(TOTAL-DEATH)
-           TO TOTAL-DEATH-FRMT(ENTRY-COUNT)
+           COMPUTE NEW-CONF-FRMT(ENTRY-COUNT)
+           = FUNCTION NUMVAL(NEW-CONF)
 
-           MOVE FUNCTION NUMVAL(NEW-REC)
-           TO NEW-REC-FRMT(ENTRY-COUNT)
+           COMPUTE TOTAL-CONF-FRMT(ENTRY-COUNT)
+           = FUNCTION NUMVAL(TOTAL-CONF)
 
-           MOVE FUNCTION NUMVAL(TOTAL-REC)
-           TO TOTAL-REC-FRMT(ENTRY-COUNT)
+           COMPUTE NEW-DEATH-FRMT(ENTRY-COUNT)
+           = FUNCTION NUMVAL(NEW-DEATH)
 
-           COMPUTE STR-LEN = FUNCTION 
+           COMPUTE TOTAL-DEATH-FRMT(ENTRY-COUNT)
+           = FUNCTION NUMVAL(TOTAL-DEATH)
+
+           COMPUTE NEW-REC-FRMT(ENTRY-COUNT)
+           = FUNCTION NUMVAL(NEW-REC)
+
+           COMPUTE TOTAL-REC-FRMT(ENTRY-COUNT)
+           = FUNCTION NUMVAL(TOTAL-REC)
+
+
+           COMPUTE STR-LEN = FUNCTION
            LENGTH(FUNCTION TRIM(DATE-TXT TRAILING))
            MOVE DATE-TXT(2:STR-LEN - 2)
            TO DATE-FRMT(ENTRY-COUNT).
@@ -175,8 +177,8 @@
       *
        WRITE-RECORD.
            PERFORM VARYING ENTRY-INDEX FROM 1 BY 1
-              UNTIL ENTRY-INDEX > ENTRY-COUNT
-              DISPLAY FORMATTED-ENTRY(ENTRY-INDEX)
+              UNTIL ENTRY-INDEX EQUAL ENTRY-COUNT
+              DISPLAY COUNTRY-FRMT(ENTRY-INDEX)
            END-PERFORM.
        WRITE-RECORD-END.
-      
+
