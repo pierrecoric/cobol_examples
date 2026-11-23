@@ -16,7 +16,7 @@
       *-----------------------------------------------------------------
        FILE SECTION.
        FD COVID-REPORT RECORDING MODE F.
-       01  COVID-RECORD                   PIC X(210).
+       01  COVID-RECORD                   PIC X(150).
 
        WORKING-STORAGE SECTION.
 
@@ -39,12 +39,12 @@
            05 COUNTRY                     PIC X(50).
            05 COUNTRY-CODE                PIC X(8).
            05 SLUG                        PIC X(50).
-           05 NEW-CONF                    PIC X(12).
-           05 TOTAL-CONF                  PIC X(12).
-           05 NEW-DEATH                   PIC X(12).
-           05 TOTAL-DEATH                 PIC X(12).
-           05 NEW-REC                     PIC X(12).
-           05 TOTAL-REC                   PIC X(12).
+           05 NEW-CONF                    PIC X(8).
+           05 TOTAL-CONF                  PIC X(8).
+           05 NEW-DEATH                   PIC X(8).
+           05 TOTAL-DEATH                 PIC X(8).
+           05 NEW-REC                     PIC X(8).
+           05 TOTAL-REC                   PIC X(8).
            05 DATE-TXT                    PIC X(25).
       *
       *                                    Initializing a table with 250
@@ -55,13 +55,14 @@
               10 COUNTRY-FRMT             PIC X(50).
               10 COUNTRY-CODE-FRMT        PIC X(8).
               10 SLUG-FRMT                PIC X(50).
-              10 NEW-CONF-FRMT            PIC 9(12).
-              10 TOTAL-CONF-FRMT          PIC 9(12).
-              10 NEW-DEATH-FRMT           PIC 9(12).
-              10 TOTAL-DEATH-FRMT         PIC 9(12).
-              10 NEW-REC-FRMT             PIC 9(12).
-              10 TOTAL-REC-FRMT           PIC 9(12).
-              10 DATE-FRMT                PIC X(25).
+              10 NEW-CONF-FRMT            PIC 9(8).
+              10 TOTAL-CONF-FRMT          PIC 9(8).
+              10 NEW-DEATH-FRMT           PIC 9(8).
+              10 TOTAL-DEATH-FRMT         PIC 9(8).
+              10 NEW-REC-FRMT             PIC 9(8).
+              10 TOTAL-REC-FRMT           PIC 9(8).
+              10 DATE-FRMT                PIC X(10).
+              10 TIME-FRMT                PIC X(15).
       *
        01  STR-LEN                        PIC 9(3).
        01  ENTRY-COUNT                    PIC 9(3) VALUE 0.
@@ -78,8 +79,8 @@
            OPEN INPUT COVID-REPORT.
        OPEN-FILE-END.
       *
-      *                      This order of operation to skip the header.
-      *                                                       To review.
+      *                                        Read the record one extra
+      *                                        time to skip the headers.
       *
        READ-NEXT-RECORD.
            PERFORM READ-RECORD
@@ -89,7 +90,6 @@
               PERFORM FORMAT-RECORD
               PERFORM READ-RECORD
            END-PERFORM.
-           DISPLAY ENTRY-COUNT.
        READ-NEXT-RECORD-END.
       *
       *            Call the WRITE-RECORD paragraph to output the result.
@@ -130,7 +130,8 @@
            ADD 1 TO ENTRY-COUNT.
        POPULATE-RECORD-TXT-END.
       *
-      *                                 Paragraph to format the records.
+      *                                          Paragraph to format the
+      *                                  different fields of the record.
       *
        FORMAT-RECORD.
            COMPUTE STR-LEN = FUNCTION
@@ -166,19 +167,87 @@
            COMPUTE TOTAL-REC-FRMT(ENTRY-COUNT)
            = FUNCTION NUMVAL(TOTAL-REC)
 
-
-           COMPUTE STR-LEN = FUNCTION
-           LENGTH(FUNCTION TRIM(DATE-TXT TRAILING))
-           MOVE DATE-TXT(2:STR-LEN - 2)
+           MOVE DATE-TXT(2:11)
            TO DATE-FRMT(ENTRY-COUNT).
+
+           MOVE DATE-TXT(12:10)
+           TO TIME-FRMT(ENTRY-COUNT).
        FORMAT-RECORD-END.
       *
-      *Let's just display for now.
+      *                            Paragraph to display all the records.
       *
        WRITE-RECORD.
            PERFORM VARYING ENTRY-INDEX FROM 1 BY 1
               UNTIL ENTRY-INDEX EQUAL ENTRY-COUNT
-              DISPLAY COUNTRY-FRMT(ENTRY-INDEX)
+              DISPLAY
+              "*********************************"
+              "*********************************"
+
+              DISPLAY
+              "DATE: "
+              DATE-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "TIME: "
+              TIME-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "COUNTRY: "
+              COUNTRY-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "COUNTRY CODE: "
+              COUNTRY-CODE-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "SLUG: "
+              SLUG-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "NEW CONFIRMED CASES:   "
+              NEW-CONF-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "TOTAL CONFIRMED CASES: "
+              TOTAL-CONF-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "NEW DEATHS:            "
+              NEW-DEATH-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "TOTAL DEATHS:          "
+              TOTAL-DEATH-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "NEW RECOVERIES:        "
+              NEW-REC-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "TOTAL RECOVERIES:      "
+              TOTAL-REC-FRMT(ENTRY-INDEX)
+
+              DISPLAY
+              "*********************************"
+              "*********************************"
+
+              DISPLAY " "
            END-PERFORM.
        WRITE-RECORD-END.
 
+      *
+      *                                             The required format.
+      *
+      ******************************************************************
+      *DATE: 2020-04-22
+      *TIME: T16:54:5
+      *COUNTRY: "Antigua and Barbuda"
+      *COUNTRY CODE: "AG"
+      *SLUG: "antigua-and-barbuda"
+      *NEW CONFIRMED CASES: 00000
+      *TOTAL CONFIRMED CASES: 00023
+      *NEW DEATHS: 00000
+      *TOTAL DEATHS: 00003
+      *NEW RECOVERIES: 00004
+      *TOTAL RECOVERIES: 00007
+      ******************************************************************
