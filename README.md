@@ -34,3 +34,8 @@ Example to call a subprogram with and without passing data. Example of JCL to li
 ## 7. COND1
 [COND1](https://github.com/pierrecoric/cobol_examples/tree/main/7_COND1)
 Examples of different conditional expressions. Relative to chapter 8 of the course.
+
+## 8. COVID
+[COVID](https://github.com/pierrecoric/cobol_examples/tree/main/8_COVID)
+My answer to the covid report challenge. 
+There is also a script to run the job and export the output to a text file. (npm run covid)
