@@ -1,5 +1,7 @@
 {
     "scripts": {
-        "commit-all": "bash commit_all.sh"
+        "commit-all": "bash commit_all.sh",
+        "list-ds": "bash zowe_list.sh",
+        "covid": "bash covid.sh"
     }
 }
