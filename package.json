@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "commit-all": "bash commit_all.sh"
+    }
+}
