@@ -20,7 +20,7 @@ spinner() {
 }
 
 echo "Hello, this is my answer to the covid challenge."
-echo "Do you wish to do that all thing? (y/n)"
+echo "Do you wish to do that thing? (y/n)"
 
 read ans
 
