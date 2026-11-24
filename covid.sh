@@ -40,6 +40,7 @@ if [ "$ans" = "y" ]; then
 
     echo "Job ID: $jobid"
     zowe zos-jobs view spool-file-by-id "$jobid" 104 > 8_COVID/output.txt
+    cat 8_COVID/output.txt
 
 elif [ "$ans" = "n" ]; then
     echo "oh bugger!"
